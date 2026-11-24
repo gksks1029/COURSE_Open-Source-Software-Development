@@ -1,0 +1,134 @@
+{
+  "apiVersion": "serving.knative.dev/v1",
+  "kind": "Service",
+  "metadata": {
+    "annotations": {
+      "serving.knative.dev/creator": "system:serviceaccount:kserve:kserve-controller-manager",
+      "serving.knative.dev/lastModifier": "system:serviceaccount:kserve:kserve-controller-manager"
+    },
+    "creationTimestamp": "2026-11-23T07:39:59Z",
+    "generation": 1,
+    "labels": {
+      "component": "predictor",
+      "serving.kserve.io/inferenceservice": "sklearn-iris-v2"
+    },
+    "name": "sklearn-iris-v2-predictor",
+    "namespace": "lab2",
+    "ownerReferences": [
+      {
+        "apiVersion": "serving.kserve.io/v1beta1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "InferenceService",
+        "name": "sklearn-iris-v2",
+        "uid": "bb15213f-e19a-4d15-877e-384ba007dd20"
+      }
+    ],
+    "resourceVersion": "10374",
+    "uid": "21bc2926-e95c-4940-a71f-6d7ce2c7fb59"
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "annotations": {
+          "autoscaling.knative.dev/class": "kpa.autoscaling.knative.dev",
+          "autoscaling.knative.dev/max-scale": "1",
+          "autoscaling.knative.dev/min-scale": "1",
+          "internal.serving.kserve.io/storage-initializer-sourceuri": "pvc://lab2-iris-models/v1",
+          "prometheus.kserve.io/path": "/metrics",
+          "prometheus.kserve.io/port": "8080",
+          "serving.kserve.io/deploymentMode": "Knative",
+          "serving.kserve.io/enable-tag-routing": "true"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "component": "predictor",
+          "serving.kserve.io/inferenceservice": "sklearn-iris-v2"
+        }
+      },
+      "spec": {
+        "containerConcurrency": 0,
+        "containers": [
+          {
+            "args": [
+              "--model_name=sklearn-iris-v2",
+              "--model_dir=/mnt/models",
+              "--http_port=8080"
+            ],
+            "image": "kserve/sklearnserver:v0.16.0",
+            "name": "kserve-container",
+            "readinessProbe": {
+              "successThreshold": 1,
+              "tcpSocket": {
+                "port": 0
+              }
+            },
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "1Gi"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "256Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "runAsNonRoot": true
+            }
+          }
+        ],
+        "enableServiceLinks": false,
+        "timeoutSeconds": 300
+      }
+    },
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100,
+        "tag": "latest"
+      }
+    ]
+  },
+  "status": {
+    "address": {
+      "url": "http://sklearn-iris-v2-predictor.lab2.svc.cluster.local"
+    },
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-11-23T07:40:20Z",
+        "status": "True",
+        "type": "ConfigurationsReady"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:40:21Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:40:21Z",
+        "status": "True",
+        "type": "RoutesReady"
+      }
+    ],
+    "latestCreatedRevisionName": "sklearn-iris-v2-predictor-00001",
+    "latestReadyRevisionName": "sklearn-iris-v2-predictor-00001",
+    "observedGeneration": 1,
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100,
+        "revisionName": "sklearn-iris-v2-predictor-00001",
+        "tag": "latest",
+        "url": "http://latest-sklearn-iris-v2-predictor.lab2.example.com"
+      }
+    ],
+    "url": "http://sklearn-iris-v2-predictor.lab2.example.com"
+  }
+}

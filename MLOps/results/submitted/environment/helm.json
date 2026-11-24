@@ -1,0 +1,20 @@
+[
+  {
+    "name": "kserve",
+    "namespace": "kserve",
+    "revision": "2",
+    "updated": "2026-11-23 00:56:58.69606393 +0800 CST",
+    "status": "deployed",
+    "chart": "kserve-v0.16.0",
+    "app_version": ""
+  },
+  {
+    "name": "kserve-crd",
+    "namespace": "kserve",
+    "revision": "1",
+    "updated": "2026-11-23 00:46:05.956391619 +0800 CST",
+    "status": "deployed",
+    "chart": "kserve-crd-v0.16.0",
+    "app_version": ""
+  }
+]

@@ -1,0 +1,26 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: environment-smoke
+  namespace: lab2
+  annotations:
+    serving.kserve.io/deploymentMode: Knative
+spec:
+  predictor:
+    minReplicas: 1
+    maxReplicas: 1
+    containers:
+      - name: kserve-container
+        image: docker.io/hashicorp/http-echo:1.0.0
+        args:
+          - -listen=:8080
+          - -text=lab2-environment-ok
+        ports:
+          - containerPort: 8080
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi

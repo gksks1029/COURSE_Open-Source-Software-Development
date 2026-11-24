@@ -1,0 +1,6 @@
+# Local tools, cluster credentials, caches, and virtual environments.
+.tools/
+.state/
+.venv/
+__pycache__/
+*.py[cod]

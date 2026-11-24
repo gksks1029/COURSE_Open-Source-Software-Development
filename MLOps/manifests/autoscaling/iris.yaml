@@ -1,0 +1,25 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: sklearn-iris
+  namespace: lab2
+  annotations:
+    serving.kserve.io/deploymentMode: Knative
+    serving.kserve.io/enable-tag-routing: "true"
+spec:
+  predictor:
+    minReplicas: 1
+    maxReplicas: 3
+    scaleMetric: concurrency
+    scaleTarget: 1
+    containerConcurrency: 2
+    model:
+      modelFormat:
+        name: sklearn
+        version: "1"
+      runtime: kserve-sklearnserver
+      protocolVersion: v1
+      storageUri: pvc://lab2-iris-models/v2
+      resources:
+        requests: {cpu: 100m, memory: 256Mi}
+        limits: {cpu: 500m, memory: 1Gi}

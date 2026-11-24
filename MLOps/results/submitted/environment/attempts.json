@@ -1,0 +1,22 @@
+{
+  "url": "http://localhost:8080/",
+  "hostname": "environment-smoke.lab2.example.com",
+  "attempts": [
+    {
+      "timestamp": "2026-11-23T07:37:54.255107+00:00",
+      "status": 200,
+      "body": "lab2-environment-ok\n",
+      "headers": {
+        "content-length": "20",
+        "content-type": "text/plain; charset=utf-8",
+        "date": "Mon, 23 Nov 2026 07:37:54 GMT",
+        "x-app-name": "http-echo",
+        "x-app-version": "1.0.0",
+        "x-envoy-upstream-service-time": "1",
+        "server": "istio-envoy",
+        "connection": "close"
+      },
+      "error": ""
+    }
+  ]
+}

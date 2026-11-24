@@ -1,0 +1,13 @@
+{
+  "run_id": "6fc2953f4f7649bb93970cfb492bd703",
+  "expected_latest_percent": 20.0,
+  "counts_by_revision": {
+    "sklearn-iris-predictor-00001": 806,
+    "sklearn-iris-predictor-00002": 194
+  },
+  "latest_revision": "sklearn-iris-predictor-00002",
+  "measured_latest_percent": 19.4,
+  "total": 1000,
+  "failed": 0,
+  "passed": true
+}

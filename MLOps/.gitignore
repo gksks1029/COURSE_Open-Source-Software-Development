@@ -1,0 +1,11 @@
+.tools/
+.state/
+.venv/
+__pycache__/
+*.py[cod]
+# Course slides are reference material, not submission artifacts.
+*.pptx
+# Internal assignment reference and packaging records.
+/hw2.txt
+/results/provenance.json
+/results/package-validation.json

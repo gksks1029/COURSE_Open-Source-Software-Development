@@ -1,0 +1,137 @@
+{
+  "apiVersion": "serving.kserve.io/v1beta1",
+  "kind": "InferenceService",
+  "metadata": {
+    "annotations": {
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"serving.kserve.io/v1beta1\",\"kind\":\"InferenceService\",\"metadata\":{\"annotations\":{\"serving.kserve.io/deploymentMode\":\"Knative\",\"serving.kserve.io/enable-tag-routing\":\"true\"},\"name\":\"sklearn-iris\",\"namespace\":\"lab2\"},\"spec\":{\"predictor\":{\"containerConcurrency\":2,\"maxReplicas\":3,\"minReplicas\":1,\"model\":{\"modelFormat\":{\"name\":\"sklearn\",\"version\":\"1\"},\"protocolVersion\":\"v1\",\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"1Gi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"256Mi\"}},\"runtime\":\"kserve-sklearnserver\",\"storageUri\":\"pvc://lab2-iris-models/v2\"},\"scaleMetric\":\"concurrency\",\"scaleTarget\":1}}}\n",
+      "serving.kserve.io/deploymentMode": "Knative",
+      "serving.kserve.io/enable-tag-routing": "true"
+    },
+    "creationTimestamp": "2026-11-23T07:39:25Z",
+    "finalizers": [
+      "inferenceservice.finalizers"
+    ],
+    "generation": 4,
+    "name": "sklearn-iris",
+    "namespace": "lab2",
+    "resourceVersion": "13987",
+    "uid": "f068ff2c-7921-42f1-bc31-dbe990eff7ac"
+  },
+  "spec": {
+    "predictor": {
+      "containerConcurrency": 2,
+      "maxReplicas": 3,
+      "minReplicas": 1,
+      "model": {
+        "modelFormat": {
+          "name": "sklearn",
+          "version": "1"
+        },
+        "name": "",
+        "protocolVersion": "v1",
+        "resources": {
+          "limits": {
+            "cpu": "500m",
+            "memory": "1Gi"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "256Mi"
+          }
+        },
+        "runtime": "kserve-sklearnserver",
+        "storageUri": "pvc://lab2-iris-models/v2"
+      },
+      "scaleMetric": "concurrency",
+      "scaleTarget": 1
+    }
+  },
+  "status": {
+    "address": {
+      "url": "http://sklearn-iris.lab2.svc.cluster.local"
+    },
+    "clusterServingRuntimeName": "kserve-sklearnserver",
+    "components": {
+      "predictor": {
+        "address": {
+          "url": "http://sklearn-iris-predictor.lab2.svc.cluster.local"
+        },
+        "latestCreatedRevision": "sklearn-iris-predictor-00003",
+        "latestReadyRevision": "sklearn-iris-predictor-00003",
+        "latestRolledoutRevision": "sklearn-iris-predictor-00003",
+        "previousRolledoutRevision": "sklearn-iris-predictor-00002",
+        "traffic": [
+          {
+            "latestRevision": true,
+            "percent": 100,
+            "revisionName": "sklearn-iris-predictor-00003",
+            "tag": "latest",
+            "url": "http://latest-sklearn-iris-predictor.lab2.example.com"
+          }
+        ],
+        "url": "http://sklearn-iris-predictor.lab2.example.com"
+      }
+    },
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-11-23T07:51:07Z",
+        "status": "True",
+        "type": "IngressReady"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:51:07Z",
+        "severity": "Info",
+        "status": "True",
+        "type": "LatestDeploymentReady"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:51:07Z",
+        "severity": "Info",
+        "status": "True",
+        "type": "PredictorConfigurationReady"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:51:07Z",
+        "status": "True",
+        "type": "PredictorReady"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:51:07Z",
+        "severity": "Info",
+        "status": "True",
+        "type": "PredictorRouteReady"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:51:07Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:51:07Z",
+        "severity": "Info",
+        "status": "True",
+        "type": "RoutesReady"
+      },
+      {
+        "lastTransitionTime": "2026-11-23T07:39:26Z",
+        "severity": "Info",
+        "status": "False",
+        "type": "Stopped"
+      }
+    ],
+    "deploymentMode": "Knative",
+    "modelStatus": {
+      "copies": {
+        "failedCopies": 0,
+        "totalCopies": 1
+      },
+      "states": {
+        "activeModelState": "Loaded",
+        "targetModelState": "Loaded"
+      },
+      "transitionStatus": "UpToDate"
+    },
+    "observedGeneration": 4,
+    "url": "http://sklearn-iris.lab2.example.com"
+  }
+}

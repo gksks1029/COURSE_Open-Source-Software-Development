@@ -1,0 +1,13 @@
+{
+  "revision": "sklearn-iris-predictor-00003",
+  "peak_ready_during_load": 3,
+  "final": {
+    "desired": 1,
+    "ready": 1,
+    "kpa_desired": 1,
+    "kpa_actual": 1
+  },
+  "requests": 109821,
+  "failed": 0,
+  "passed": true
+}

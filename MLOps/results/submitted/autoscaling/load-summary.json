@@ -1,0 +1,10 @@
+{
+  "run_id": "5410abc420aa45f0a48514267ddcf11d",
+  "started_at": "2026-11-23T08:01:19.848628+00:00",
+  "total": 109821,
+  "successful": 109821,
+  "failed": 0,
+  "errors": [],
+  "latency_p50_ms": 15.028,
+  "latency_p95_ms": 26.924
+}

@@ -1,0 +1,21 @@
+{
+  "sklearn_version": "1.5.2",
+  "models": {
+    "v1": {
+      "C": 1.0,
+      "sha256": "6ec3b7b0b99429228de3ddceb6373f0038fa1fbcbcd9019c577a2e09e4d95cdb",
+      "example_predictions": [
+        1,
+        1
+      ]
+    },
+    "v2": {
+      "C": 10.0,
+      "sha256": "371b06d24c224a9a2508d585d1fe5310402ee75386ed638d8726193cfc94aadf",
+      "example_predictions": [
+        1,
+        1
+      ]
+    }
+  }
+}

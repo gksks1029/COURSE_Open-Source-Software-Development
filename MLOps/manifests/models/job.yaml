@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: lab2-build-iris
+  namespace: lab2
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 600
+  template:
+    spec:
+      restartPolicy: Never
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: build
+          image: docker.io/kserve/sklearnserver:v0.16.0
+          command: [python, /scripts/train.py]
+          env:
+            - name: OMP_NUM_THREADS
+              value: "1"
+            - name: OPENBLAS_NUM_THREADS
+              value: "1"
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {cpu: "1", memory: 1Gi}
+          volumeMounts:
+            - name: models
+              mountPath: /models
+            - name: source
+              mountPath: /scripts
+              readOnly: true
+      volumes:
+        - name: models
+          persistentVolumeClaim:
+            claimName: lab2-iris-models
+        - name: source
+          configMap:
+            name: lab2-model-builder
