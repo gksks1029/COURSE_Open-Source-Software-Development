@@ -1,0 +1,1 @@
+{"model_name":"sklearn-iris-v2","model_version":null,"id":"56b15eab-2f00-4a54-a96d-3afb22f431a7","parameters":null,"outputs":[{"name":"output-0","shape":[2],"datatype":"INT64","parameters":null,"data":[1,1]}]}

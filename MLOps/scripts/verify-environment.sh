@@ -17,6 +17,13 @@ kubectl wait --for=condition=Available apiservice/v1beta1.metrics.k8s.io --timeo
 kubectl top nodes
 kubectl get clusterservingruntime kserve-sklearnserver kserve-mlserver kserve-huggingfaceserver
 kubectl get namespace lab2
+mkdir -p "${LAB2_ROOT}/results/environment"
+admission_results="$(mktemp -d "${LAB2_ROOT}/results/environment/webhook-XXXXXXXX")"
+printf 'Admission probe results: %s\n' "${admission_results}"
+# Deployment status alone does not verify API-server -> webhook connectivity.
+python3 "${LAB2_ROOT}/scripts/admission.py" \
+  --manifest "${LAB2_ROOT}/environment/smoke-test.yaml" \
+  --output "${admission_results}/attempts.json" --timeout 180
 kubectl apply -f "${LAB2_ROOT}/environment/smoke-test.yaml"
 kubectl wait --for=condition=Ready -n lab2 \
   inferenceservice/environment-smoke --timeout=300s

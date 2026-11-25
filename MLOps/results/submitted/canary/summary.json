@@ -1,12 +1,12 @@
 {
-  "run_id": "6fc2953f4f7649bb93970cfb492bd703",
+  "run_id": "bc0b30bdc6aa494f8555e1dbca384e5e",
   "expected_latest_percent": 20.0,
   "counts_by_revision": {
-    "sklearn-iris-predictor-00001": 806,
-    "sklearn-iris-predictor-00002": 194
+    "sklearn-iris-predictor-00004": 800,
+    "sklearn-iris-predictor-00005": 200
   },
-  "latest_revision": "sklearn-iris-predictor-00002",
-  "measured_latest_percent": 19.4,
+  "latest_revision": "sklearn-iris-predictor-00005",
+  "measured_latest_percent": 20.0,
   "total": 1000,
   "failed": 0,
   "passed": true

@@ -11,10 +11,10 @@
     "finalizers": [
       "inferenceservice.finalizers"
     ],
-    "generation": 3,
+    "generation": 7,
     "name": "sklearn-iris",
     "namespace": "lab2",
-    "resourceVersion": "12716",
+    "resourceVersion": "125330",
     "uid": "f068ff2c-7921-42f1-bc31-dbe990eff7ac"
   },
   "spec": {
@@ -53,23 +53,17 @@
         "address": {
           "url": "http://sklearn-iris-predictor.lab2.svc.cluster.local"
         },
-        "latestCreatedRevision": "sklearn-iris-predictor-00002",
-        "latestReadyRevision": "sklearn-iris-predictor-00002",
-        "latestRolledoutRevision": "sklearn-iris-predictor-00001",
+        "latestCreatedRevision": "sklearn-iris-predictor-00005",
+        "latestReadyRevision": "sklearn-iris-predictor-00005",
+        "latestRolledoutRevision": "sklearn-iris-predictor-00005",
+        "previousRolledoutRevision": "sklearn-iris-predictor-00004",
         "traffic": [
           {
             "latestRevision": true,
-            "percent": 20,
-            "revisionName": "sklearn-iris-predictor-00002",
+            "percent": 100,
+            "revisionName": "sklearn-iris-predictor-00005",
             "tag": "latest",
             "url": "http://latest-sklearn-iris-predictor.lab2.example.com"
-          },
-          {
-            "latestRevision": false,
-            "percent": 80,
-            "revisionName": "sklearn-iris-predictor-00001",
-            "tag": "prev",
-            "url": "http://prev-sklearn-iris-predictor.lab2.example.com"
           }
         ],
         "url": "http://sklearn-iris-predictor.lab2.example.com"
@@ -77,40 +71,40 @@
     },
     "conditions": [
       {
-        "lastTransitionTime": "2026-11-23T07:47:01Z",
+        "lastTransitionTime": "2026-11-24T12:41:19Z",
         "status": "True",
         "type": "IngressReady"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:47:01Z",
+        "lastTransitionTime": "2026-11-24T12:37:11Z",
         "severity": "Info",
         "status": "True",
         "type": "LatestDeploymentReady"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:47:01Z",
+        "lastTransitionTime": "2026-11-24T12:37:11Z",
         "severity": "Info",
         "status": "True",
         "type": "PredictorConfigurationReady"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:47:02Z",
+        "lastTransitionTime": "2026-11-24T12:41:19Z",
         "status": "True",
         "type": "PredictorReady"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:47:02Z",
+        "lastTransitionTime": "2026-11-24T12:41:19Z",
         "severity": "Info",
         "status": "True",
         "type": "PredictorRouteReady"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:47:02Z",
+        "lastTransitionTime": "2026-11-24T12:41:19Z",
         "status": "True",
         "type": "Ready"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:47:02Z",
+        "lastTransitionTime": "2026-11-24T12:41:19Z",
         "severity": "Info",
         "status": "True",
         "type": "RoutesReady"
@@ -134,7 +128,7 @@
       },
       "transitionStatus": "UpToDate"
     },
-    "observedGeneration": 2,
+    "observedGeneration": 7,
     "url": "http://sklearn-iris.lab2.example.com"
   }
 }

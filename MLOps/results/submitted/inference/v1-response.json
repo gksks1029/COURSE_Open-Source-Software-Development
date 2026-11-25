@@ -3,6 +3,6 @@
   "status": 200,
   "body": "{\"predictions\":[1,1]}",
   "error": "",
-  "latency_ms": 24.424,
+  "latency_ms": 13.545,
   "ok": true
 }

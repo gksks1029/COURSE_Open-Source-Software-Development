@@ -1,8 +1,8 @@
 {
   "seq": 1,
   "status": 200,
-  "body": "{\"model_name\":\"sklearn-iris-v2\",\"model_version\":null,\"id\":\"cbe01e55-9442-4899-b1e1-6e027687214b\",\"parameters\":null,\"outputs\":[{\"name\":\"output-0\",\"shape\":[2],\"datatype\":\"INT64\",\"parameters\":null,\"data\":[1,1]}]}",
+  "body": "{\"model_name\":\"sklearn-iris-v2\",\"model_version\":null,\"id\":\"4c99334b-3259-4348-be00-c61c782873ed\",\"parameters\":null,\"outputs\":[{\"name\":\"output-0\",\"shape\":[2],\"datatype\":\"INT64\",\"parameters\":null,\"data\":[1,1]}]}",
   "error": "",
-  "latency_ms": 22.846,
+  "latency_ms": 9.636,
   "ok": true
 }

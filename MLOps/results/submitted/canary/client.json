@@ -1,12 +1,12 @@
 {
-  "run_id": "6fc2953f4f7649bb93970cfb492bd703",
-  "started_at": "2026-11-23T07:47:03.382189+00:00",
+  "run_id": "bc0b30bdc6aa494f8555e1dbca384e5e",
+  "started_at": "2026-11-24T12:37:12.357701+00:00",
   "total": 1000,
   "successful": 1000,
   "failed": 0,
   "errors": [],
-  "latency_p50_ms": 59.224,
-  "latency_p95_ms": 67.553,
+  "latency_p50_ms": 9.536,
+  "latency_p95_ms": 34.411,
   "success_sequences": [
     1,
     2,

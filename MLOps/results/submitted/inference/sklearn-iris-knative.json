@@ -7,7 +7,7 @@
       "serving.knative.dev/lastModifier": "system:serviceaccount:kserve:kserve-controller-manager"
     },
     "creationTimestamp": "2026-11-23T07:39:26Z",
-    "generation": 1,
+    "generation": 5,
     "labels": {
       "component": "predictor",
       "serving.kserve.io/inferenceservice": "sklearn-iris"
@@ -24,7 +24,7 @@
         "uid": "f068ff2c-7921-42f1-bc31-dbe990eff7ac"
       }
     ],
-    "resourceVersion": "10126",
+    "resourceVersion": "114964",
     "uid": "fa3302de-b4fc-49bf-bb50-676927aaea70"
   },
   "spec": {
@@ -102,29 +102,29 @@
     },
     "conditions": [
       {
-        "lastTransitionTime": "2026-11-23T07:39:57Z",
+        "lastTransitionTime": "2026-11-24T12:08:21Z",
         "status": "True",
         "type": "ConfigurationsReady"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:39:58Z",
+        "lastTransitionTime": "2026-11-24T12:08:22Z",
         "status": "True",
         "type": "Ready"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:39:58Z",
+        "lastTransitionTime": "2026-11-24T12:08:22Z",
         "status": "True",
         "type": "RoutesReady"
       }
     ],
-    "latestCreatedRevisionName": "sklearn-iris-predictor-00001",
-    "latestReadyRevisionName": "sklearn-iris-predictor-00001",
-    "observedGeneration": 1,
+    "latestCreatedRevisionName": "sklearn-iris-predictor-00004",
+    "latestReadyRevisionName": "sklearn-iris-predictor-00004",
+    "observedGeneration": 5,
     "traffic": [
       {
         "latestRevision": true,
         "percent": 100,
-        "revisionName": "sklearn-iris-predictor-00001",
+        "revisionName": "sklearn-iris-predictor-00004",
         "tag": "latest",
         "url": "http://latest-sklearn-iris-predictor.lab2.example.com"
       }

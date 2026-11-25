@@ -7,7 +7,7 @@
       "serving.knative.dev/lastModifier": "system:serviceaccount:kserve:kserve-controller-manager"
     },
     "creationTimestamp": "2026-11-23T07:39:26Z",
-    "generation": 3,
+    "generation": 7,
     "labels": {
       "component": "predictor",
       "serving.kserve.io/inferenceservice": "sklearn-iris"
@@ -24,7 +24,7 @@
         "uid": "f068ff2c-7921-42f1-bc31-dbe990eff7ac"
       }
     ],
-    "resourceVersion": "12730",
+    "resourceVersion": "125310",
     "uid": "fa3302de-b4fc-49bf-bb50-676927aaea70"
   },
   "spec": {
@@ -102,33 +102,29 @@
     },
     "conditions": [
       {
-        "lastTransitionTime": "2026-11-23T07:47:01Z",
+        "lastTransitionTime": "2026-11-24T12:37:11Z",
         "status": "True",
         "type": "ConfigurationsReady"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:47:32Z",
-        "message": "Waiting for load balancer to be ready",
-        "reason": "Uninitialized",
-        "status": "Unknown",
+        "lastTransitionTime": "2026-11-24T12:41:19Z",
+        "status": "True",
         "type": "Ready"
       },
       {
-        "lastTransitionTime": "2026-11-23T07:47:32Z",
-        "message": "Waiting for load balancer to be ready",
-        "reason": "Uninitialized",
-        "status": "Unknown",
+        "lastTransitionTime": "2026-11-24T12:41:19Z",
+        "status": "True",
         "type": "RoutesReady"
       }
     ],
-    "latestCreatedRevisionName": "sklearn-iris-predictor-00002",
-    "latestReadyRevisionName": "sklearn-iris-predictor-00002",
-    "observedGeneration": 3,
+    "latestCreatedRevisionName": "sklearn-iris-predictor-00005",
+    "latestReadyRevisionName": "sklearn-iris-predictor-00005",
+    "observedGeneration": 7,
     "traffic": [
       {
         "latestRevision": true,
         "percent": 100,
-        "revisionName": "sklearn-iris-predictor-00002",
+        "revisionName": "sklearn-iris-predictor-00005",
         "tag": "latest",
         "url": "http://latest-sklearn-iris-predictor.lab2.example.com"
       }

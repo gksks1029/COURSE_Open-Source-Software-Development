@@ -1,0 +1,2 @@
+# Preserve Python csv.writer output and recognize CRLF as a CSV line ending.
+MLOps/results/submitted/**/*.csv -text whitespace=cr-at-eol

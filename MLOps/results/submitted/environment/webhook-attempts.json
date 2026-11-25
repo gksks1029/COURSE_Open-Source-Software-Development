@@ -1,0 +1,11 @@
+{
+  "manifest": "/home/kaisiang/OSSD/kserve/environment/smoke-test.yaml",
+  "attempts": [
+    {
+      "timestamp": "2026-11-24T12:27:52.714924+00:00",
+      "returncode": 0,
+      "stdout": "inferenceservice.serving.kserve.io/environment-smoke configured (server dry run)\n",
+      "stderr": ""
+    }
+  ]
+}
