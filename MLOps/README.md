@@ -6,9 +6,9 @@
 
 ## 1. 作業內容與檔案位置
 
-### Deployment & Test Files
+### 部署與測試檔案
 
-| 作業要求 | 對應檔案 | 說明 |
+| 實作項目 | 對應檔案 | 說明 |
 | --- | --- | --- |
 | KServe InferenceService YAML | [iris-v1.yaml](manifests/inference/iris-v1.yaml)、[iris-v2.yaml](manifests/inference/iris-v2.yaml) | 相同模型分別使用 V1、V2 Protocol |
 | Canary Deployment YAML | [20-percent.yaml](manifests/canary/20-percent.yaml)、[promote.yaml](manifests/canary/promote.yaml) | 新版 20% 分流，再提升至 100% |
@@ -21,11 +21,11 @@
 
 ### 截圖與測試資料
 
-| 驗收項目 | 原始資料 | 執行截圖 |
+| 驗證項目 | 測試資料 | 執行截圖 |
 | --- | --- | --- |
 | InferenceService READY=True | [V1 服務狀態](results/submitted/inference/sklearn-iris.json)、[V2 服務狀態](results/submitted/inference/sklearn-iris-v2.json) | [01-ready.png](screenshots/01-ready.png) |
-| V1 Protocol 預測 | [自動測試回應](results/submitted/inference/v1-response.json)、[截圖呼叫回應](results/submitted/inference/screenshot-v1-response.json) | [02-inference-v1.png](screenshots/02-inference-v1.png) |
-| V2 Protocol 預測 | [自動測試回應](results/submitted/inference/v2-response.json)、[截圖呼叫回應](results/submitted/inference/screenshot-v2-response.json) | [03-inference-v2.png](screenshots/03-inference-v2.png) |
+| V1 Protocol 預測 | [自動測試回應](results/submitted/inference/v1-response.json)、[手動呼叫回應](results/submitted/inference/screenshot-v1-response.json) | [02-inference-v1.png](screenshots/02-inference-v1.png) |
+| V2 Protocol 預測 | [自動測試回應](results/submitted/inference/v2-response.json)、[手動呼叫回應](results/submitted/inference/screenshot-v2-response.json) | [03-inference-v2.png](screenshots/03-inference-v2.png) |
 | Canary 各版本請求數 | [summary.json](results/submitted/canary/summary.json)、[requests.csv](results/submitted/canary/requests.csv)、[revision 日誌](results/submitted/canary/) | [04-canary-counts.png](screenshots/04-canary-counts.png) |
 | 負載期間副本數變化 | [replicas.csv](results/submitted/autoscaling/replicas.csv)、[summary.json](results/submitted/autoscaling/summary.json) | [05-autoscaling.png](screenshots/05-autoscaling.png) |
 
@@ -50,7 +50,7 @@ Kubernetes Job 使用 sklearn 1.5.2 訓練 RBF SVC：模型 v1 設定 `C=1`，�
 `sklearn-iris` 使用 V1 Protocol，`sklearn-iris-v2` 使用 V2 Protocol；協定測試階段均載入模型 v1，對相同輸入回傳 `[1, 1]`。
 模型 v1／v2 表示模型檔案版本，V1／V2 Protocol 表示 API 格式，Knative revision 表示服務設定版本。模型更新或擴縮容設定變更皆可能建立新 revision。
 
-部署採 Knative／Serverless 模式，對應講義第 50 頁的 revision 與 `canaryTrafficPercent` 流程。
+部署採 Knative／Serverless 模式，透過 `canaryTrafficPercent` 設定新 revision 的流量比例。
 
 ## 3. 實測結果
 
@@ -102,7 +102,7 @@ bash scripts/lab.sh canary
 
 ### 升版與負載測試
 
-Canary 結果及截圖保存後，執行升版與負載測試：
+確認 Canary 分流測試通過後，先將流量切換至新版，再執行負載測試。
 
 ```bash
 bash scripts/lab.sh promote &&
@@ -145,8 +145,6 @@ python3 -m unittest discover -s tests -v
 ```
 
 測試涵蓋 HTTP 請求識別、錯誤與逾時、負載期限、opener 重用、revision 計數、部署狀態等待、webhook 就緒探測及目錄搬移後的 ingress 服務處理。
-離線測試與 cluster 實測分別記錄；部署結果以原始測試資料與截圖為依據。
-LLM 的提交結果驗證跨機路由、HTTP 回應與文字生成。吞吐量、延遲分布與生成品質需另行量測。
+LLM 跨機測試驗證路由、HTTP 回應與文字生成。吞吐量、延遲分布與生成品質需另行量測。
 
-環境為本機單節點 cluster，未驗證多節點高可用性。Podman、Kubernetes 與負載工具共用主機資源；模型儲存於節點內的 PVC，刪除 cluster 將一併移除節點內實驗資料。
-工具二進位、kubeconfig、憑證及課堂簡報不列入提交內容。
+環境為本機單節點 cluster，未驗證多節點高可用性。Podman、Kubernetes 與負載工具共用主機資源。Iris 模型儲存於節點內的 PVC，刪除 cluster 將一併移除節點內實驗資料。

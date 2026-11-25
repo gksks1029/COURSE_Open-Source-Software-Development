@@ -32,7 +32,7 @@ bash scripts/lab.sh inference
 kubectl --context kind-kserve -n lab2 get isvc sklearn-iris sklearn-iris-v2
 ```
 
-畫面包含命令、服務名稱、URL 與 READY 欄位，對應 `01-ready.png`。
+確認 `sklearn-iris` 與 `sklearn-iris-v2` 的 `READY` 均為 `True`。
 
 ### V1 Protocol
 
@@ -47,7 +47,7 @@ curl --silent --show-error --fail \
 python3 -m json.tool .state/screenshot-v1.json
 ```
 
-畫面包含 API 路徑、HTTP 200 與預測結果，對應 `02-inference-v1.png`。
+預期回應為 HTTP 200，`predictions` 為 `[1, 1]`。
 
 ### V2 Protocol
 
@@ -62,7 +62,7 @@ curl --silent --show-error --fail \
 python3 -m json.tool .state/screenshot-v2.json
 ```
 
-畫面包含 API 路徑、HTTP 200、`model_name`，以及 outputs 的 `shape: [2]`、`datatype: INT64`、`data: [1, 1]`，對應 `03-inference-v2.png`。
+預期回應為 HTTP 200，`model_name` 為 `sklearn-iris-v2`，`outputs[0]` 的 `shape` 為 `[2]`、`datatype` 為 `INT64`、`data` 為 `[1, 1]`。
 
 ### Canary 請求數統計
 
@@ -70,8 +70,7 @@ python3 -m json.tool .state/screenshot-v2.json
 bash scripts/lab.sh canary
 ```
 
-畫面包含 `PREV=80`、`LATEST=20`、兩個 revision 的實際計數、總請求數、失敗數及 PASS，對應 `04-canary-counts.png`。
-流量分配具有抽樣波動，新的實測計數以該輪結果為準。Canary 截圖及原始資料須在 promote 前保存。
+`PREV=80`、`LATEST=20` 為兩個 revision 的設定比例。實際請求數會隨抽樣波動，分流是否通過以該輪報告為準。
 
 ### Autoscaling
 
@@ -81,8 +80,7 @@ bash scripts/lab.sh autoscale &&
 python3 scripts/show-autoscaling.py
 ```
 
-摘要指令讀取最新完成的實驗，從實際 CSV 擷取 baseline、load、cooldown 的代表樣本，對應 `05-autoscaling.png`。
-畫面包含結果來源、revision、各階段副本數、總請求數、失敗數與 PASS。
+摘要指令讀取最新完成的實驗，從 CSV 擷取 baseline、load、cooldown 的代表樣本與副本數，並列出請求數及失敗數。
 
 實測結果摘要可離線重現：
 

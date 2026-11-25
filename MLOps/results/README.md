@@ -6,7 +6,7 @@
 | --- | --- |
 | [environment/](submitted/environment/) | 環境恢復結果、Helm release、ingress 與 webhook 就緒探測 |
 | [models/](submitted/models/) | sklearn 版本、模型訓練參數與輸出 |
-| [inference/](submitted/inference/) | V1／V2 請求與回應、服務狀態、截圖手動呼叫回應 |
+| [inference/](submitted/inference/) | V1／V2 請求、自動與手動測試回應及服務狀態 |
 | [canary/](submitted/canary/) | 1,000 筆請求、queue-proxy 日誌、800／200 分流統計 |
 | [promotion/](submitted/promotion/) | 100 筆請求與日誌，新版流量比例 100% |
 | [autoscaling/](submitted/autoscaling/) | 84,325 筆請求、零失敗、Ready replicas 1→3→1 |
@@ -17,7 +17,7 @@
 ### 模型推論
 
 `v1-response.json` 與 `v2-response.json` 為自動測試結果；`status` 為 HTTP 狀態，`body` 為原始 JSON 回應字串，`ok` 為 client 檢查結果。
-`screenshot-v1-response.json` 與 `screenshot-v2-response.json` 為截圖中的手動 curl 呼叫所保存的回應。自動測試與手動呼叫具有各自的請求 ID。
+`screenshot-v1-response.json` 與 `screenshot-v2-response.json` 保存手動 `curl` 回應。自動測試與手動呼叫使用各自的請求 ID。
 服務與 Knative 狀態快照分別保存於 `sklearn-iris*.json`，對應截圖中的 revision。
 
 ### Canary 與升版

@@ -45,7 +45,7 @@ kubectl --context kind-kserve -n lab2-llm logs \
 
 ## 跨機請求
 
-在 KServe 主機開啟另一個終端機，並於 `MLOps/` 執行下列指令。`SERVER_IP` 為第二台電腦可達的私網或 VPN 介面 IP。若採用校園公網介面，須先在網路或主機層限制 TCP 18080 只接受測試端連線。此連接埠會轉發至共用 Istio ingress，HTTP 本身未加密。
+在 KServe 主機開啟另一個終端機，並於 `MLOps/` 執行下列指令。`SERVER_IP` 為測試端可達的私網或 VPN 介面 IP。TCP `18080` 以明文 HTTP 轉發至共用 Istio ingress，應限制為測試端可連線。
 
 ```bash
 source scripts/env.sh

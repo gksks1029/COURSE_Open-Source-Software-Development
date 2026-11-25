@@ -87,7 +87,7 @@ KServe release 為 `deployed` 時，後續使用 `bash scripts/lab.sh resume` �
 入口服務名稱為 `kserve-lab2-ingress.service`，透過 `127.0.0.1:8080` 執行 port-forward；此服務不設定開機自動啟動。
 kind 未配置外部 LoadBalancer，ingress Service 的 EXTERNAL-IP 顯示 `<pending>` 屬此架構的預期狀態。
 
-## 5. 執行作業
+## 5. 執行實驗
 
 ### 環境恢復與推論
 
@@ -105,14 +105,14 @@ bash scripts/lab.sh canary
 
 ### 升版與 Autoscaling
 
-Canary 原始結果及截圖保存後，執行：
+確認 Canary 分流測試通過後，先將流量切換至新版，再執行負載測試。
 
 ```bash
 bash scripts/lab.sh promote &&
 bash scripts/lab.sh autoscale
 ```
 
-各階段依序操作，避免多個程序同時修改相同服務。步驟及驗收標準見 [MLOps README](../README.md)，畫面重現方式見 [截圖說明](../screenshots/README.md)。
+各階段依序操作，避免多個程序同時修改相同服務。驗證方式與實測結果見 [MLOps README](../README.md)。
 已完成的模型 Job 可重複使用；訓練來源與既有 ConfigMap 不一致時，腳本會拒絕覆寫。
 
 ## 6. 停止與清理
@@ -211,8 +211,7 @@ kubectl --context kind-kserve -n lab2 apply --dry-run=server -f environment/smok
 ```
 
 環境驗證在實際套用資源前，等待 server-side dry run 通過，期限為 180 秒，記錄位於 `results/environment/webhook-*/attempts.json`。
-暫時性 webhook 連線錯誤可於期限內重試；YAML 或驗證錯誤直接失敗。webhook 與 failurePolicy 維持原設定。
-連續階段以 `&&` 串接，確保前一步失敗時停止後續操作。
+暫時性 webhook 連線錯誤可於期限內重試。YAML 或驗證錯誤會立即終止檢查。
 
 ## 8. 參考來源
 
