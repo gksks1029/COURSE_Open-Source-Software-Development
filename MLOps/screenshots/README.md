@@ -1,6 +1,6 @@
 # 執行結果截圖
 
-本目錄保存服務就緒、V1／V2 推論、Canary 分流與 Autoscaling 的執行畫面。
+本目錄保存 Iris 服務就緒、V1／V2 推論、Canary 分流與 Autoscaling 的執行畫面。LLM 跨機推論的結果收錄於 [回應摘要](../results/submitted/llm/chat-response-summary.json)。
 
 | 圖片 | 驗證內容 | 對應資料 |
 | --- | --- | --- |
@@ -12,7 +12,7 @@
 
 ## 畫面重現流程
 
-下列指令用於重現相同驗證項目的畫面，執行前須完成 [環境建置](../docs/SETUP.md)。
+下列指令於 `MLOps/` 目錄執行，執行前須完成 [環境建置](../docs/SETUP.md)。
 重新執行會產生新的 run、請求數與 revision。
 
 ### 環境與推論 baseline

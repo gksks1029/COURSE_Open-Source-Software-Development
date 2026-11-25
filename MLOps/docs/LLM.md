@@ -1,6 +1,6 @@
 # Qwen 0.5B 推論服務
 
-KServe 在 `lab2-llm` namespace 建立 `qwen-05b` InferenceService，以自訂 predictor 容器啟動 `/app/llama-server`。模型採 Qwen2.5-0.5B-Instruct 的 Q4_K_M GGUF 版本，首次啟動時從 Hugging Face 下載。Knative 維持單副本，每個副本同時處理一筆請求。
+KServe 在 `lab2-llm` namespace 建立 `qwen-05b` InferenceService，以自訂 predictor 容器啟動 `/app/llama-server`。模型採 Qwen2.5-0.5B-Instruct 的 Q4_K_M GGUF 版本。容器會在缺少快取時從 Hugging Face 下載模型，快取目錄設為 `/tmp/llama-cache`。Knative 維持單副本，每個副本同時處理一筆請求。
 
 Kubernetes 將模型容器的 CPU request 與 limit 都設為 4。llama.cpp 的 prompt 處理與 token 生成各使用 4 個執行緒。CPU 配額採共用排程，若未另行設定 CPU Manager，不會固定使用特定核心。推論入口為 `/openai/v1/chat/completions`。
 
@@ -13,7 +13,7 @@ Kubernetes 將模型容器的 CPU request 與 limit 都設為 4。llama.cpp 的 
 
 ## 部署與主機驗證
 
-先完成 [環境建置](SETUP.md)。下列指令於 `MLOps/` 執行，`source scripts/env.sh` 應載入可用的 `kind-kserve` kubeconfig。
+先完成 [環境建置](SETUP.md)。模型下載須能從 predictor 容器連線至 Hugging Face。下列指令於 `MLOps/` 執行，`source scripts/env.sh` 會使用專案的 kubeconfig。
 
 ```bash
 source scripts/env.sh
@@ -45,7 +45,7 @@ kubectl --context kind-kserve -n lab2-llm logs \
 
 ## 跨機請求
 
-在 KServe 主機的另一個終端機執行。 `SERVER_IP` 為第二台電腦可達的私網或 VPN 介面 IP。若採用校園公網介面，須先在網路或主機層限制 TCP 18080 只接受測試端連線。此連接埠會轉發至共用 Istio ingress，HTTP 本身未加密。
+在 KServe 主機開啟另一個終端機，並於 `MLOps/` 執行下列指令。`SERVER_IP` 為第二台電腦可達的私網或 VPN 介面 IP。若採用校園公網介面，須先在網路或主機層限制 TCP 18080 只接受測試端連線。此連接埠會轉發至共用 Istio ingress，HTTP 本身未加密。
 
 ```bash
 source scripts/env.sh

@@ -1,6 +1,6 @@
 # 實測結果索引
 
-`submitted/` 保存原始測試資料，包含 HTTP 回應、服務狀態、請求日誌及副本數時序。
+`submitted/` 保存實驗的測試資料與摘要，包含 HTTP 回應、服務狀態、請求日誌及副本數時序。
 
 | 目錄 | 主要內容 |
 | --- | --- |
@@ -45,11 +45,13 @@ Canary 對應 revision `00004`／`00005`，請求數分別為 800／200；升版
 本輪使用 revision `00006`，Ready replicas 從 1 增至 3，負載結束後降回 1。
 `latency_ms` 為 client 觀察的 HTTP 請求耗時，包含傳輸與服務處理時間，不等同於純模型計算時間。
 
+### LLM 跨機推論
+
+`chat-response-summary.json` 摘錄 Windows 測試端在 WSL 執行 `curl` 的輸出。`http_status` 記錄 HTTP 200，`body.model` 為 `qwen-05b`，`body.choices[0]` 保存生成文字與結束原因。`body.usage` 記錄 35 個輸入 token 與 70 個輸出 token，合計 105 個。 [回應摘要](submitted/llm/chat-response-summary.json) · [對應請求 JSON](../inputs/qwen-chat.json)
+
 ## 副本數曲線
 
 [replicas.png](submitted/autoscaling/replicas.png) 由 [replicas.csv](submitted/autoscaling/replicas.csv) 產生，與 [Autoscaling 截圖](../screenshots/05-autoscaling.png) 使用同一輪資料。
-
-![Autoscaling 副本數時序](submitted/autoscaling/replicas.png)
 
 圖表重建指令於 `MLOps/` 目錄執行，環境需具備 matplotlib；此操作不連線 cluster 或重新執行負載：
 
@@ -58,7 +60,3 @@ python3 scripts/plot-autoscaling.py
 ```
 
 新一輪實驗結果另存於 `results/<stage>/<run>/`。
-
-## LLM 跨機推論
-
-[chat-response-summary.json](submitted/llm/chat-response-summary.json) 摘錄第二台電腦的 curl 輸出，保留 HTTP 狀態、模型名稱、生成內容與 token 統計。 [對應請求 JSON](../inputs/qwen-chat.json)
