@@ -17,6 +17,7 @@
 | 負載測試腳本與輸入 | [traffic.py](scripts/traffic.py)、[負載輸入](results/submitted/autoscaling/load-input.json) | 限定測試時間及並行數，記錄每筆 HTTP 結果 |
 | 模型產生與儲存設定 | [train.py](models/train.py)、[job.yaml](manifests/models/job.yaml)、[pvc.yaml](manifests/models/pvc.yaml) | 使用相同 serving image 訓練模型並存入 PVC |
 | 環境建置設定 | [environment/](environment/)、[SETUP.md](docs/SETUP.md) | 固定版本、kind 設定、安裝步驟及問題排除 |
+| Bonus 1：LLM Serving | [部署設定](manifests/llm/qwen-05b.yaml)、[請求 JSON](inputs/qwen-chat.json)、[操作說明](docs/LLM.md) | Qwen2.5-0.5B-Instruct 跨機推論 |
 
 ### Screenshots 與原始結果
 
@@ -62,6 +63,7 @@ Kubernetes Job 使用 sklearn 1.5.2 訓練 RBF SVC：模型 v1 設定 `C=1`，�
 | Canary 80／20 | 舊 revision 800 次、新 revision 200 次，零失敗 | PASS |
 | Promote | 100 次請求全數進入新版，零失敗 | PASS |
 | Autoscaling | Ready replicas `1 → 3 → 1`；84,325 次請求，零失敗 | PASS |
+| Bonus 1：LLM 跨機推論 | 第二台電腦透過主機 IP 呼叫 Chat Completion，回傳 HTTP 200 與生成文字 | PASS |
 
 Canary 以 run ID、request sequence 與 queue-proxy revision 日誌逐筆核對請求歸屬。
 Autoscaling 使用 16 個並行 worker，負載持續 120 秒，每筆請求包含 256 筆 Iris 資料；每 5 秒記錄 Deployment 與 KPA 的副本狀態。
@@ -89,6 +91,12 @@ Autoscaling 使用 16 個並行 worker，負載持續 120 秒，每筆請求包�
 ![Autoscaling Ready replicas 1→3→1，84,325 次請求零失敗](screenshots/05-autoscaling.png)
 
 [副本數曲線](results/submitted/autoscaling/replicas.png)由同一輪 [replicas.csv](results/submitted/autoscaling/replicas.csv) 繪製，呈現負載開始、擴容及冷卻縮容的完整時序。
+
+### Bonus 1：LLM Serving
+
+KServe 以自訂 predictor 容器部署 llama.cpp 的 `llama-server`，載入 Qwen2.5-0.5B-Instruct Q4_K_M GGUF 模型。服務採單副本，模型容器的 CPU request 與 limit 均為 4，prompt 處理與 token 生成各設定 4 個執行緒。
+
+KServe 部署於 x86_64 Ubuntu 主機，目前版本為 Ubuntu 26.04。Windows 測試端在 WSL Ubuntu 20.04 中執行 `curl`，透過主機 IP 的 `18080` 連接埠呼叫 `/openai/v1/chat/completions`。Istio 依 `Host` header 將請求轉送至 `qwen-05b`。服務回傳 HTTP 200 並生成 70 個 token，`finish_reason` 為 `stop`。 [部署與跨機操作](docs/LLM.md) · [回應摘要](results/submitted/llm/chat-response-summary.json)
 
 ## 4. 重現方式
 
@@ -127,13 +135,13 @@ bash scripts/lab.sh autoscale
 
 ```bash
 source scripts/env.sh
-curl --fail-with-body \
+curl --fail \
   -H 'Host: sklearn-iris.lab2.example.com' \
   -H 'Content-Type: application/json' \
   --data-binary @inputs/iris-v1.json \
   http://localhost:8080/v1/models/sklearn-iris:predict
 
-curl --fail-with-body \
+curl --fail \
   -H 'Host: sklearn-iris-v2.lab2.example.com' \
   -H 'Content-Type: application/json' \
   --data-binary @inputs/iris-v2.json \

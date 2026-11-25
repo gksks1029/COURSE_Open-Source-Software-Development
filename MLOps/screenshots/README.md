@@ -37,7 +37,7 @@ kubectl --context kind-kserve -n lab2 get isvc sklearn-iris sklearn-iris-v2
 ### V1 Protocol
 
 ```bash
-curl --silent --show-error --fail-with-body \
+curl --silent --show-error --fail \
   -H 'Host: sklearn-iris.lab2.example.com' \
   -H 'Content-Type: application/json' \
   --data-binary @inputs/iris-v1.json \
@@ -52,7 +52,7 @@ python3 -m json.tool .state/screenshot-v1.json
 ### V2 Protocol
 
 ```bash
-curl --silent --show-error --fail-with-body \
+curl --silent --show-error --fail \
   -H 'Host: sklearn-iris-v2.lab2.example.com' \
   -H 'Content-Type: application/json' \
   --data-binary @inputs/iris-v2.json \

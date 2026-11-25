@@ -10,6 +10,7 @@
 | [canary/](submitted/canary/) | 1,000 筆請求、queue-proxy 日誌、800／200 分流統計 |
 | [promotion/](submitted/promotion/) | 100 筆請求與日誌，新版流量比例 100% |
 | [autoscaling/](submitted/autoscaling/) | 84,325 筆請求、零失敗、Ready replicas 1→3→1 |
+| [llm/](submitted/llm/) | Qwen 0.5B 跨機 Chat Completion 回應摘要 |
 
 ## 資料格式與核對方式
 
@@ -57,3 +58,7 @@ python3 scripts/plot-autoscaling.py
 ```
 
 新一輪實驗結果另存於 `results/<stage>/<run>/`。
+
+## LLM 跨機推論
+
+[chat-response-summary.json](submitted/llm/chat-response-summary.json) 摘錄第二台電腦的 curl 輸出，保留 HTTP 狀態、模型名稱、生成內容與 token 統計。 [對應請求 JSON](../inputs/qwen-chat.json)

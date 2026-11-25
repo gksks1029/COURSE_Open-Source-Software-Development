@@ -1,0 +1,8 @@
+{
+  "model": "qwen-05b",
+  "messages": [
+    {"role": "user", "content": "My name is wboy."}
+  ],
+  "max_tokens": 256,
+  "stream": false
+}

@@ -4,7 +4,7 @@
 
 ## 1. 環境前提與版本
 
-實驗環境為 Ubuntu 24.04、Linux x86_64、rootless Podman 4.9.3、cgroup v2 與使用者層級 systemd。
+初始建置環境採 Ubuntu 24.04、Linux x86_64、rootless Podman 4.9.3、cgroup v2 與使用者層級 systemd。主機目前的作業系統版本與跨機測試端配置見 [LLM 實驗環境](LLM.md#實驗環境)。
 必要工具包含 `podman`、`systemd-run`、`curl`、`tar`、`sha256sum`、`rg` 與 Python 3；建置過程需下載 container image 及 Helm chart。
 工具及 cluster 本機狀態分別存放於 `.tools/` 與 `.state/`。
 

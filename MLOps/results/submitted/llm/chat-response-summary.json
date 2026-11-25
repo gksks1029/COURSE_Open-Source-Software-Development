@@ -1,0 +1,25 @@
+{
+  "source": "Captured curl output from the second computer (excerpt)",
+  "http_status": 200,
+  "server": "istio-envoy",
+  "body": {
+    "id": "chatcmpl-5UyrZJJLghCNsj5EPHYWtjym1oipEjtn",
+    "object": "chat.completion",
+    "model": "qwen-05b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Wboy, my name is Qwen, a 2019-2020 AI language model created by Alibaba Cloud. I am designed to be a helpful assistant and can answer a wide range of questions. If you have any questions, please feel free to ask and I'll do my best to provide the information you need."
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 35,
+      "completion_tokens": 70,
+      "total_tokens": 105
+    }
+  }
+}
